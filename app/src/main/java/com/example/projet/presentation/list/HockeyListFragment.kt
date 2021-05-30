@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,7 +57,9 @@ class HockeyListFragment : Fragment() {
         })
 
     }
-    private fun onClickedPokemon(hockey: Hockey) {
-        findNavController().navigate(R.id.navigationToHockeyDetailFragment)
+    private fun onClickedPokemon(id: Int) {
+        findNavController().navigate(R.id.navigationToHockeyDetailFragment, bundleOf(
+            "hockeyId" to (id + 1)
+        ))
     }
 }

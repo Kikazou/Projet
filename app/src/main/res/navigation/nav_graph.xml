@@ -21,6 +21,11 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_hockey_detail">
 
+        <argument
+            android:name="hockeyId"
+            app:argType="integer"
+            android:defaultValue="-&" />
+
         <action
             android:id="@+id/navigationToHockeyListFragment"
             app:destination="@id/HockeyListFragment" />

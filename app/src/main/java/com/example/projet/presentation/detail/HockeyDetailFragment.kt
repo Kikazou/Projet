@@ -20,6 +20,7 @@ class HockeyDetailFragment : Fragment() {
         private lateinit var textViewName: TextView
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,7 +38,8 @@ class HockeyDetailFragment : Fragment() {
     }
 
     private fun callApi(){
-        Singletons.HockeyApi.getHockeyDetail("1").enqueue(object : Callback<HockeyDetailResponse>{
+        val id = arguments?.getInt("hockeyId") ?: -1
+        Singletons.HockeyApi.getHockeyDetail(id).enqueue(object : Callback<HockeyDetailResponse>{
             override fun onFailure(
                 call: Call<HockeyDetailResponse>,
                 t: Throwable

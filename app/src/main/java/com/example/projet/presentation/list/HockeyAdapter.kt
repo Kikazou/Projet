@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
 
-class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Hockey) -> Unit)? = null): RecyclerView.Adapter<HockeyAdapter.ViewHolder>() {
+class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Int) -> Unit)? = null): RecyclerView.Adapter<HockeyAdapter.ViewHolder>() {
 
 
 
@@ -35,7 +35,7 @@ class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Hockey) 
         val hockey : Hockey = dataSet[position]
         viewHolder.textView.text = hockey.name
         viewHolder.itemView.setOnClickListener{
-            listener?.invoke(hockey)
+            listener?.invoke(position)
         }
     }
 

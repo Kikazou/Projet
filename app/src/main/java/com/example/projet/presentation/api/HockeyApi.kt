@@ -10,7 +10,7 @@ class HockeyApi {
     fun getHockeyList(): Call<HockeyListResponse>
 
     @GET( value: "hockey/{id}")
-    fun getHockeyDetail(@Path (value: "id") id: String):  Call<HockeyDetailResponse>
+    fun getHockeyDetail(@Path (value: "id") id: Int):  Call<HockeyDetailResponse>
 }
 
 
