@@ -9,21 +9,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
+import com.example.projet.presentation.Singletons
 import com.example.projet.presentation.api.HockeyApi
-import com.example.projet.presentation.api.HockeyResponse
+import com.example.projet.presentation.api.HockeyListResponse
 import javax.security.auth.callback.Callback
 
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class HockeyListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private val adapter = HockeyAdapter(listOf(), ::onClickedPokemon)
 
-
-    private val layoutManager = LinearLayoutManager(context)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -41,25 +37,19 @@ class HockeyListFragment : Fragment() {
 
 
         recyclerView.apply{
-            layoutManager = this@HockeyListFragment.layoutManager
+            layoutManager = LinearLayoutManager(context)
             adapter = this@HockeyListFragment.adapter
         }
 
-        val retrofit : Retrofit = Retrofit.Builder()
-            .baseUrl( baseUrl: "https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val HockeyApi: HockeyApi = retrofit.create(HockeyApi::class.java)
-
-        HockeyApi.getHockeyList().enqueue(object : Callback<HockeyResponse>{
-            override fun onFailure(call: Call<HockeyResponse>, t: Throwable){
+        Singletons.HockeyApi.getHockeyList().enqueue(object : Callback<HockeyListResponse>{
+            override fun onFailure(call: Call<HockeyListResponse>, t: Throwable){
 
         }
-            override fun onResponse(call: Call<HockeyResponse>, response: Response<HockeyResponse>){
+            override fun onResponse(call: Call<HockeyListResponse>, response: Response<HockeyListResponse>){
                 if (response.isSuccessful && response.body() != null){
-                    val HockeyResponse: HockeyResponse? = response.body()!!
-                    adapter.updateList(HockeyResponse.results)
+                    val HockeyListResponse: HockeyListResponse? = response.body()!!
+                    adapter.updateList(HockeyListResponse.results)
                 }
             }
 
