@@ -2,8 +2,10 @@ package com.example.projet.presentation.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.projet.R
 
 class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Int) -> Unit)? = null): RecyclerView.Adapter<HockeyAdapter.ViewHolder>() {
@@ -12,9 +14,11 @@ class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Int) -> 
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
             val textView: TextView
+            val imageView: ImageView
 
             init {
                 textView =view.findViewById(R.id.hockey_name)
+                imageView = view.findViewById(R.id.hockey_img)
             }
         }
 
@@ -37,6 +41,12 @@ class HockeyAdapter (private var dataSet: List<Hockey>, var listener: ((Int) -> 
         viewHolder.itemView.setOnClickListener{
             listener?.invoke(position)
         }
+
+        Glide
+            .with(viewHolder.itemView.context)
+            .load("https://raw.githubsercontent.com/PokeAPI/sprites/master/sprites/pokemon/${position + 1}.png")
+            .centerCrop()
+            .into(viewHolder.imageView)
     }
 
     override fun getItemCount()=dataSet.size
