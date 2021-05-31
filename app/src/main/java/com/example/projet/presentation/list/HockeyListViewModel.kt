@@ -26,7 +26,7 @@ class HockeyListViewModel : ViewModel(){
             override fun onResponse(call: retrofit2.Call<HockeyListResponse>, response: Response<HockeyListResponse>) {
                 if (response.isSuccessful && response.body() != null){
                     val hockeyResponse: HockeyListResponse? = response.body()!!
-                    hockeyList.value = HockeySuccess(hockeyResponse.results)
+                    hockeyList.value = HockeySuccess(hockeyResponse!!.results)
 
                 }else{
                     hockeyList.value = HockeyError
