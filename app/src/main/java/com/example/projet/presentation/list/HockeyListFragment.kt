@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +24,8 @@ class HockeyListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private val adapter = HockeyAdapter(listOf(), ::onClickedPokemon)
+
+    private val viewModel: HockeyListViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -42,19 +46,12 @@ class HockeyListFragment : Fragment() {
             adapter = this@HockeyListFragment.adapter
         }
 
-        Singletons.HockeyApi.getHockeyList().enqueue(object : Callback<HockeyListResponse> {
-            override fun onFailure(call: Call<HockeyListResponse>, t: Throwable) {
 
-            }
-
-            override fun onResponse(call: Call<HockeyListResponse>, response: Response<HockeyListResponse>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val HockeyListResponse: HockeyListResponse? = response.body()!!
-                    adapter.updateList(hockeyResponse.results)
-                }
-            }
-
+        viewModel.hockeyList.observe(viewLifecycleOwner, Observer { list ->
+            adapter.updateList(list)
         })
+
+        adapter.updateList(hockeyResponse.results)
     }
 
 
