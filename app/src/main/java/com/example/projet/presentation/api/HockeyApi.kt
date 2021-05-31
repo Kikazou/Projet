@@ -1,16 +1,13 @@
 package com.example.projet.presentation.api
 
-import android.telecom.Call
-import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 
 interface HockeyApi {
-    @GET( value: "hockey")
-    fun getHockeyList(): Call<HockeyListResponse>
+    @GET( "hockey")
+    fun getHockeyList(): retrofit2.Call<HockeyListResponse>
 
-    @GET( value: "hockey/{id}")
-    fun getHockeyDetail(@Path (value: "id") id: Int):  Call<HockeyDetailResponse>
+    @GET( "hockey/{id}")
+    fun getHockeyDetail(@Path("id") id: Int): retrofit2.Call<HockeyDetailResponse>
 }
-
-

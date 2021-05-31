@@ -1,19 +1,15 @@
 package com.example.projet.presentation.detail
 
 import android.os.Bundle
-import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.example.projet.R
 import com.example.projet.presentation.Singletons
 import com.example.projet.presentation.api.HockeyDetailResponse
-import javax.security.auth.callback.Callback
-
+import retrofit2.Response
 class HockeyDetailFragment : Fragment() {
 
 
@@ -39,16 +35,16 @@ class HockeyDetailFragment : Fragment() {
 
     private fun callApi(){
         val id = arguments?.getInt("hockeyId") ?: -1
-        Singletons.HockeyApi.getHockeyDetail(id).enqueue(object : Callback<HockeyDetailResponse>{
+        Singletons.HockeyApi.getHockeyDetail(id).enqueue(object : retrofit2.Callback<HockeyDetailResponse>{
             override fun onFailure(
-                call: Call<HockeyDetailResponse>,
+                call: retrofit2.Call<HockeyDetailResponse>,
                 t: Throwable
             ){
 
             }
 
             override fun onResponse(
-                call: Call<HockeyDetailResponse>,
+                call: retrofit2.Call<HockeyDetailResponse>,
                 response: Response<HockeyDetailResponse>
 
             ){

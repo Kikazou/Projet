@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HockeyListFragment"
-        android:name="com.example.projet.presentation.list.FirstFragment"
+        android:name="com.example.projet.presentation.list.HockeyListFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_hockey_list">
 
@@ -24,7 +24,7 @@
         <argument
             android:name="hockeyId"
             app:argType="integer"
-            android:defaultValue="-&" />
+            android:defaultValue="-1" />
 
         <action
             android:id="@+id/navigationToHockeyListFragment"

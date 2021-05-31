@@ -1,8 +1,5 @@
 package com.example.projet.presentation.list
 
-import android.content.Context
-import android.content.SharedPreferences
-import android.media.MediaCodec.MetricsConstants.MODE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,9 +15,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
-import com.example.projet.presentation.Singletons
-import com.example.projet.presentation.api.HockeyListResponse
-import javax.security.auth.callback.Callback
 
 
 class HockeyListFragment : Fragment() {
@@ -49,7 +43,7 @@ class HockeyListFragment : Fragment() {
         loader = view.findViewById(R.id.hockey_loader)
         textViewError = view.findViewById(R.id.hockey_error)
 
-        recyclerView.apply{
+        recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = this@HockeyListFragment.adapter
         }
@@ -59,12 +53,10 @@ class HockeyListFragment : Fragment() {
             loader.isVisible = hockeyModel is HockeyLoader
             textViewError.isVisible = hockeyModel is HockeyError
 
-            if(hockeyModel is HockeySuccess) {
+            if (hockeyModel is HockeySuccess) {
                 adapter.updateList(hockeyModel.hockeyList)
             }
         })
-
-        adapter.updateList(hockeyResponse.results)
     }
 
 
